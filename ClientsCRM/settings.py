@@ -31,6 +31,10 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "diwjowfhifhPH*(Ffhfo)")
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = [
+    "*",
+    "https://crm.porosyatakit.ru"
+]
 
 
 # Application definition
