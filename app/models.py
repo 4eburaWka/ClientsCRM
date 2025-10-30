@@ -4,18 +4,32 @@ from django.db import models
 
 
 class Project(models.Model):
-    client: "Client" = models.ForeignKey("Client", on_delete=models.SET_NULL, null=True)
+    class Meta:
+        verbose_name = "Проект"
+        verbose_name_plural = "Проекты"
 
-    title: str = models.CharField(max_length=50)
-    description: str = models.TextField()
-    total_cost: float = models.FloatField()
+    client: "Client" = models.ForeignKey("Client", verbose_name="клиент", on_delete=models.SET_NULL, null=True)
 
-    start_work_date: datetime.date = models.DateField()
-    stop_work_date: datetime.date = models.DateField()
+    title: str = models.CharField(verbose_name="название", max_length=50)
+    description: str = models.TextField(verbose_name="описание")
+    total_cost: float = models.FloatField(verbose_name="итоговая стоимость разработки")
 
-    total_paid: float = models.FloatField()
+    start_work_date: datetime.date = models.DateField(verbose_name="начало разработки")
+    stop_work_date: datetime.date = models.DateField(verbose_name="конец разработки", null=True)
+
+    total_paid: float = models.FloatField(verbose_name="всего уплачено")
+
+    def __str__(self):
+        return self.title
 
 
 class Client(models.Model):
-    fullname: str = models.CharField(max_length=50)
-    start_partnership_date: datetime.datetime = models.DateTimeField(auto_now=True)
+    class Meta:
+        verbose_name = "Клиент"
+        verbose_name_plural = "Клиенты"
+
+    fullname: str = models.CharField(verbose_name="полное имя", max_length=50)
+    start_partnership_date: datetime.datetime = models.DateTimeField(verbose_name="дата начала сотрудничества", auto_created=True)
+
+    def __str__(self):
+        return self.fullname
