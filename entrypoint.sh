@@ -6,4 +6,4 @@ until uv run manage.py migrate; do
     sleep 2
 done
 
-exec uv run gunicorn --bind 0.0.0.0:8000 crm.wsgi:application 
+exec uv run manage.py runserver 
