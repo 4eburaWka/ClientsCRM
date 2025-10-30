@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"><title>Дашборд</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Дашборд</h1>
+    <p>Сегодня: {{ today }}</p>
+
+    <h2>Статусы</h2>
+    <ul>
+      {% for row in stats %}
+        <li>{{ row.status }}: {{ row.cnt }}</li>
+      {% empty %}
+        <li>Нет данных</li>
+      {% endfor %}
+    </ul>
+
+    <h2>Сумма по активным заказам</h2>
+    <p><strong>{{ total_active }} ₽</strong></p>
+
+    <h2>Ближайшие дедлайны</h2>
+    <ol>
+      {% for o in upcoming %}
+        <li>{{ o.due_date }} — {{ o.title }} ({{ o.customer.name }})</li>
+      {% empty %}
+        <li>Нет ближайших дедлайнов</li>
+      {% endfor %}
+    </ol>
+
+    <p><a href="/orders/">Публичный список заказов</a> · <a href="/admin/">Админка</a></p>
+  </div>
+  <div class="footer">Система учёта заказов и клиентов © 2025</div>
+</body>
+
+</html>

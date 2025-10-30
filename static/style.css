@@ -1,0 +1,96 @@
+/* Общие стили */
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Контейнер */
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 30px auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  padding: 20px 30px;
+}
+
+/* Заголовки */
+h1, h2 {
+  color: #2b4b70;
+}
+
+h1 {
+  border-bottom: 2px solid #2b4b70;
+  padding-bottom: 8px;
+}
+
+/* Таблицы */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  text-align: left;
+}
+
+th {
+  background: #e8f0fe;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Ссылки */
+a {
+  color: #2b4b70;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Кнопки (если добавишь позже) */
+button, .btn {
+  background-color: #2b4b70;
+  color: #fff;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover, .btn:hover {
+  background-color: #1e3451;
+}
+
+/* Секции */
+ul, ol {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+/* Подвал / навигация */
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+  color: #888;
+}
