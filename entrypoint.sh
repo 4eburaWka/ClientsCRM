@@ -6,4 +6,4 @@ until uv run manage.py migrate; do
     sleep 2
 done
 
-exec uv run manage.py runserver 
+exec uv run manage.py runserver 0.0.0.0:8000
