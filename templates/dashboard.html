@@ -1,39 +1,82 @@
 <!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8"><title>Дашборд</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+  <meta charset="utf-8">
+  <title>Дашборд</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
   <div class="container">
     <h1>Дашборд</h1>
-    <p>Сегодня: {{ today }}</p>
+    <p>Сегодня: <strong>{{ today }}</strong></p>
 
-    <h2>Статусы</h2>
+    <h2>Агрегаты по статусам</h2>
     <ul>
-      {% for row in stats %}
-        <li>{{ row.status }}: {{ row.cnt }}</li>
+      {% for s in stats %}
+        <li>{{ s.title }}: {{ s.count }}</li>
       {% empty %}
         <li>Нет данных</li>
       {% endfor %}
     </ul>
 
-    <h2>Сумма по активным заказам</h2>
-    <p><strong>{{ total_active }} ₽</strong></p>
+    <h2>Фильтр по приближающимся дедлайнам</h2>
+    <form method="get">
+      Показать заказы с дедлайном в течение:
+      <select name="days" onchange="this.form.submit()">
+        <option value="3"  {% if days == 3 %}selected{% endif %}>3 дней</option>
+        <option value="7"  {% if days == 7 %}selected{% endif %}>7 дней</option>
+        <option value="14" {% if days == 14 %}selected{% endif %}>14 дней</option>
+        <option value="30" {% if days == 30 %}selected{% endif %}>30 дней</option>
+      </select>
+      <noscript><button type="submit">Показать</button></noscript>
+    </form>
 
-    <h2>Ближайшие дедлайны</h2>
-    <ol>
+    <h3>Приближающиеся дедлайны (до {{ days }} дней)</h3>
+    <table>
+      <tr>
+        <th>Дедлайн</th>
+        <th>Заказ</th>
+        <th>Клиент</th>
+        <th>Статус</th>
+      </tr>
       {% for o in upcoming %}
-        <li>{{ o.due_date }} — {{ o.title }} ({{ o.customer.name }})</li>
+        <tr>
+          <td>{{ o.due_date }}</td>
+          <td>{{ o.title }}</td>
+          <td>{{ o.customer.name }}</td>
+          <td>{{ o.get_status_display }}</td>
+        </tr>
       {% empty %}
-        <li>Нет ближайших дедлайнов</li>
+        <tr><td colspan="4">Подходящих заказов нет</td></tr>
       {% endfor %}
-    </ol>
+    </table>
 
-    <p><a href="/orders/">Публичный список заказов</a> · <a href="/admin/">Админка</a></p>
+    <h3>Просроченные</h3>
+    <table>
+      <tr>
+        <th>Дедлайн</th>
+        <th>Заказ</th>
+        <th>Клиент</th>
+        <th>Статус</th>
+      </tr>
+      {% for o in overdue %}
+        <tr>
+          <td>{{ o.due_date }}</td>
+          <td>{{ o.title }}</td>
+          <td>{{ o.customer.name }}</td>
+          <td>{{ o.get_status_display }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="4">Просроченных заказов нет</td></tr>
+      {% endfor %}
+    </table>
+
+    <p style="margin-top:14px;">
+      <a href="/orders/">Публичный список заказов</a> ·
+      <a href="/admin/">Админка</a>
+    </p>
   </div>
-  <div class="footer">Система учёта заказов и клиентов © 2025</div>
+  <div class="footer">Система учёта заказов и сроков © 2025</div>
 </body>
-
 </html>
