@@ -32,7 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
-    "https://crm.porosyatakit.ru"
+    "https://clients.porosyatakit.ru"
 ]
 
 
